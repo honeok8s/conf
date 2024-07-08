@@ -8,21 +8,22 @@ services:
       - '443:443'
       - '81:81'
     environment:
-      DB_MYSQL_HOST: "npm_db"
+      DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: "npm"
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
-      DISABLE_IPV6: 'true' # without v6
+      # Uncomment this if IPv6 is not enabled on your host
+      DISABLE_IPV6: 'true'
     networks:
       - npm
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
     depends_on:
-      - npm_db
+      - db
 
-  npm_db:
+  db:
     image: 'jc21/mariadb-aria:10.11.5-innodb'
     container_name: npm_db
     restart: unless-stopped
