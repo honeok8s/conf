@@ -11,9 +11,12 @@ USER = "s01"
 
 PASSWORD = "USER_DEFAULT_PASSWORD"
 PORT = 35601
-CU = "119.6.222.234"
-CT = "speed.sc.189.cn"
-CM = "wap.sc.10086.cn"
+CU = "119.6.6.6"
+CT = "61.139.2.69"
+CM = "211.137.96.205"
+#CU = "119.6.222.234"
+#CT = "speed.sc.189.cn"
+#CM = "wap.sc.10086.cn"
 PROBEPORT = 80
 PROBE_PROTOCOL_PREFER = "ipv4"  # ipv4, ipv6
 PING_PACKET_HISTORY_LEN = 100
