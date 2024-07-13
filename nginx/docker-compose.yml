@@ -13,6 +13,8 @@ services:
       - ./certs:/etc/nginx/certs
       - ./html:/var/www/html
       - ./log:/var/log/nginx
+      - /etc/localtime:/etc/localtime:ro  # 挂载本地时区文件
+      - /etc/timezone:/etc/timezone:ro    # 挂载本地时区配置
     tmpfs:
     # noexec: 禁止在tmpfs上执行可执行文件,增加安全性,防止恶意代码执行
     # nosuid: 禁止设置setuid和setgid权限,同样是为了安全考虑,避免潜在的安全漏洞
