@@ -24,7 +24,8 @@ services:
       "-c",
       "java -jar /surveyking.jar --spring.datasource.url=jdbc:mysql://db/surveyking --spring.datasource.username=surveyking --spring.datasource.password=surveyking"]
     depends_on:
-      - db
+      db:
+        condition: service_healthy
      
   db:
     image: mysql:5.7.42
