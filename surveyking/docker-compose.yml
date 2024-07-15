@@ -7,6 +7,11 @@ services:
       JAVA_OPTS: "-Xms128m -Xmx1024m"
     ports:
       - 1991:1991
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "3"
+        max-size: "30m"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./surveyking/surveyking-v1.7.2.jar:/surveyking.jar
@@ -17,7 +22,7 @@ services:
     command: [
       "sh",
       "-c",
-      "java -jar /surveyking.jar --spring.datasource.url=jdbc:mysql://mysql/surveyking --spring.datasource.username=surveyking --spring.datasource.password=surveyking"]
+      "java -jar /surveyking.jar --spring.datasource.url=jdbc:mysql://db/surveyking --spring.datasource.username=surveyking --spring.datasource.password=surveyking"]
     depends_on:
       - db
      
