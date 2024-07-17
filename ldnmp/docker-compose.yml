@@ -1,0 +1,113 @@
+services:
+  nginx:
+    image: nginx:alpine3.19
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/html:/var/www/html
+      - ./nginx/log/nginx:/var/log/nginx
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    tmpfs:
+      - /var/cache/nginx:rw,noexec,nosuid,size=512m
+    command: ["/bin/sh", "-c", >
+      "chmod -R 777 /var/www/html && nginx -g 'daemon off;'"]
+    networks:
+      - web
+
+  php:
+    image: php:fpm-alpine3.20
+    container_name: php
+    restart: unless-stopped
+    volumes:
+      - ./nginx/html:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    command: ["/bin/sh", "-c", >
+      "apk update > /dev/null 2>&1 && \
+      curl -sL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o /usr/local/bin/install-php-extensions > /dev/null 2>&1 && \
+      chmod +x /usr/local/bin/install-php-extensions > /dev/null 2>&1 && \
+      install-php-extensions imagick mysqli pdo_mysql gd intl zip exif bcmath opcache redis > /dev/null 2>&1 && \
+      echo 'upload_max_filesize=50M' > /usr/local/etc/php/conf.d/uploads.ini && \
+      echo 'post_max_size=50M' > /usr/local/etc/php/conf.d/post.ini && \
+      echo 'memory_limit=256M' > /usr/local/etc/php/conf.d/memory.ini && \
+      echo 'max_execution_time=1200' > /usr/local/etc/php/conf.d/max_execution_time.ini && \
+      echo 'max_input_time=600' > /usr/local/etc/php/conf.d/max_input_time.ini && \
+      chmod -R 777 /var/www/html && \
+      php-fpm"]
+    networks:
+      - web
+
+  php74:
+    image: php:7.4-fpm-alpine3.16
+    container_name: php74
+    restart: unless-stopped
+    volumes:
+      - ./nginx/html:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    command: ["/bin/sh", "-c", >
+      "apk update > /dev/null 2>&1 && \
+      curl -sL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o /usr/local/bin/install-php-extensions > /dev/null 2>&1 && \
+      chmod +x /usr/local/bin/install-php-extensions > /dev/null 2>&1 && \
+      install-php-extensions imagick mysqli pdo_mysql gd intl zip exif bcmath opcache redis > /dev/null 2>&1 && \
+      echo 'upload_max_filesize=50M' > /usr/local/etc/php/conf.d/uploads.ini && \
+      echo 'post_max_size=50M' > /usr/local/etc/php/conf.d/post.ini && \
+      echo 'memory_limit=256M' > /usr/local/etc/php/conf.d/memory.ini && \
+      echo 'max_execution_time=1200' > /usr/local/etc/php/conf.d/max_execution_time.ini && \
+      echo 'max_input_time=600' > /usr/local/etc/php/conf.d/max_input_time.ini && \
+      chmod -R 777 /var/www/html && \
+      php-fpm"]
+    networks:
+      - web
+
+  mysql:
+    image: mysql:8.0.38
+    container_name: mysql
+    restart: unless-stopped
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: 0yMJEWfIAiSJdjaQhZUPcA
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: aH8xz1grNoI
+    networks:
+      - web
+    security_opt:
+      - seccomp:unconfined
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin --user=root --password=0yMJEWfIAiSJdjaQhZUPcA ping -h localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  redis:
+    image: redis:alpine3.20
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - ./redis/data:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    command: >
+      sh -c "redis-server --port 6379 \
+             && redis-cli CONFIG SET maxmemory 512mb \
+             && redis-cli CONFIG SET maxmemory-policy allkeys-lru"
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
