@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:1.25.2
+    image: nginx:alpine3.19
     container_name: nginx
     restart: unless-stopped
     ports:
