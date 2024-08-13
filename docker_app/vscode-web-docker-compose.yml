@@ -3,7 +3,7 @@ services:
     image: codercom/code-server:latest
     container_name: vscode-web
     ports:
-      - "8080:8080"
+      - "8180:8080"
     volumes:
       - ./vscode-web:/home/coder/.local/share/code-server
     restart: unless-stopped
