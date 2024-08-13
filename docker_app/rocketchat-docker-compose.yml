@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mongo:latest
+    container_name: db
+    command: --replSet rs5 --oplogSize 256
+    volumes:
+      - ./dump:/dump
+    restart: unless-stopped
+    networks:
+      - rocket
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "printjson(rs.initiate())"]
+      interval: 10s
+      retries: 5
+
+  rocketchat:
+    image: rocket.chat:latest
+    container_name: rocketchat
+    environment:
+      - ROOT_URL=http://localhost
+      - MONGO_OPLOG_URL=mongodb://db:27017/rs5
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - rocket
+
+networks:
+  rocket-network:
