@@ -6,4 +6,4 @@ services:
     volumes:
       - ./uptimekuma:/app/data
     ports:
-      - 3001:3001
+      - 3003:3001
