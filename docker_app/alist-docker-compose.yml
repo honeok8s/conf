@@ -1,14 +1,14 @@
 services:
   alist:
-    image: 'xhofe/alist:v3.33.0'
+    image: 'xhofe/alist:latest'
     container_name: alist
     volumes:
       - './config:/opt/alist/data'
-      - './data:/data'
     ports:
       - '5244:5244'
     environment:
       - PUID=0
       - PGID=0
       - UMASK=022
+      - TZ=Asia/Shanghai
     restart: unless-stopped
