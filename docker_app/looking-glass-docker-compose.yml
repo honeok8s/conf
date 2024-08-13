@@ -3,5 +3,5 @@ services:
     image: wikihostinc/looking-glass-server
     container_name: looking-glass
     ports:
-      - "80:80"
+      - "89:80"
     restart: unless-stopped
