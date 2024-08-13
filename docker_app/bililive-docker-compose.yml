@@ -1,0 +1,10 @@
+services:
+  bililive:
+    image: chigusa/bililive-go:latest
+    container_name: bililive
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config.yml:/etc/bililive-go/config.yml
+      - ./Videos:/srv/bililive
+    restart: unless-stopped
