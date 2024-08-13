@@ -3,7 +3,7 @@ services:
     image: lscr.io/linuxserver/webtop:ubuntu-kde
     container_name: webtop-ubuntu
     ports:
-      - "3000:3000"
+      - "3006:3000"
     environment:
       - PUID=1000
       - PGID=1000
