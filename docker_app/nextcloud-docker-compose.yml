@@ -14,6 +14,10 @@ services:
       - MYSQL_PASSWORD=nextcloud
     volumes:
       - ./nextcloud:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     image: mysql:8.0:39
     container_name: nextcloud_db
@@ -25,6 +29,16 @@ services:
       - MYSQL_ROOT_PASSWORD=nextcloud
     volumes:
       - ./data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+    command:
+      --default-storage-engine=innodb
+      --innodb-buffer-pool-size=1024M # InnoDB缓冲池大小
+      --innodb-log-file-size=256M
 
 #volumes:
 #  mysql:
