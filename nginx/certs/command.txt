@@ -1,5 +1,5 @@
 # 安装
-curl https://get.acme.sh | sh -s email=xxxx@gmail.com
+curl https://get.acme.sh | sh -s email=fuck@gmail.com
 
 # 申请证书
 ~/.acme.sh/acme.sh --issue --dns dns_cf -d xxxx.com -d '*.xxxx.com'
