@@ -7,40 +7,39 @@ services:
       - "8989:80"
     environment:
       - NEXTCLOUD_ADMIN_USER=nextcloud
-      - NEXTCLOUD_ADMIN_PASSWORD=qn1Z_e8fhg3m6AYo
-      - MYSQL_HOST=db
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=nextcloud
+      - NEXTCLOUD_ADMIN_PASSWORD=NEXTCLOUD_ADMIN_PASSWORD
+#      - MYSQL_HOST=db
+#      - MYSQL_DATABASE=nextcloud
+#      - MYSQL_USER=nextcloud
+#      - MYSQL_PASSWORD=nextcloud
     volumes:
       - ./nextcloud:/var/www/html
-    depends_on:
-      db:
-        condition: service_healthy
+#    depends_on:
+#      db:
+#        condition: service_healthy
 
-  db:
-    image: mysql:8.0.39
-    container_name: nextcloud_db
-    restart: unless-stopped
-    environment:
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_PASSWORD=nextcloud
-      - MYSQL_ROOT_PASSWORD=nextcloud
-    volumes:
-      - ./data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "--silent"]
-      interval: 10s
-      retries: 5
-      start_period: 30s
-      timeout: 5s
-    command:
-      --default-storage-engine=innodb
-      --innodb-buffer-pool-size=1024M
-      --innodb-log-file-size=256M
+#  db:
+#    image: mysql:8.0.39
+#    container_name: nextcloud_db
+#    restart: unless-stopped
+#    environment:
+#      - MYSQL_DATABASE=nextcloud
+#      - MYSQL_USER=nextcloud
+#      - MYSQL_PASSWORD=nextcloud
+#      - MYSQL_ROOT_PASSWORD=nextcloud
+#    volumes:
+#      - ./data:/var/lib/mysql
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "--silent"]
+#      interval: 10s
+#      retries: 5
+#      start_period: 30s
+#      timeout: 5s
+#    command:
+#      --default-storage-engine=innodb
+#      --innodb-buffer-pool-size=1024M
+#      --innodb-log-file-size=256M
 
 # volumes:
 #   mysql:
 #   nextcloud:
-
