@@ -1,6 +1,6 @@
 services:
   nginx:
-    image: nginx:alpine3.19
+    image: nginx:alpine
     container_name: nginx
     restart: unless-stopped
     ports:
@@ -16,7 +16,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     tmpfs:
-      - /var/cache/nginx:rw,noexec,nosuid,size=512m
+      - /var/cache/fst_cache:rw,noexec,nosuid,size=512m
+      - /var/cache/ngx_cache:rw,noexec,nosuid,size=512m
     command: ["/bin/sh", "-c", >
       "chmod -R 777 /var/www/html && nginx -g 'daemon off;'"]
     networks:
@@ -94,7 +95,7 @@ services:
       start_period: 10s
 
   redis:
-    image: redis:alpine3.20
+    image: redis:alpine
     container_name: redis
     restart: unless-stopped
     volumes:
