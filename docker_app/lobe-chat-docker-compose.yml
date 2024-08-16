@@ -1,7 +1,0 @@
-services:
-  lobe-chat:
-    image: lobehub/lobe-chat:latest
-    container_name: lobe-chat
-    ports:
-      - "8036:3210"
-    restart: unless-stopped

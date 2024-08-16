@@ -1,0 +1,43 @@
+[mysql]
+default-character-set=utf8mb4
+
+[mysqld]
+port=3306
+default-storage-engine=INNODB # 默认存储引擎
+character-set-server=utf8mb4  # 字符集设置
+default-authentication-plugin=mysql_native_password # 默认身份验证插件
+skip-log-bin      # 禁用二进制日志功能
+skip-name-resolve # 禁用名称解析
+
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+slow_query_log = ON # 慢查询日志开启
+long_query_time = 5 # 慢查询阈值设置为5秒
+slow_query_log_file = /var/lib/mysql/slow.log
+
+max_connections=500 # 最大连接数
+tmp_table_size=32M  # 临时表大小
+myisam_sort_buffer_size=64M # MyISAM排序缓冲区大小
+innodb_log_buffer_size=256M # InnoDB日志缓冲区大小
+innodb_buffer_pool_size=1024M # InnoDB缓冲池大小
+innodb_log_file_size=1024M    # InnoDB日志文件大小
+innodb_open_files=500   # InnoDB打开文件数
+max_allowed_packet=256M # 最大允许的数据包大小
+max_connect_errors=100  # 最大连接错误数
+connect_timeout=60      # 连接超时时间
+net_read_timeout=60     # 网络读取超时时间
+log_timestamps = SYSTEM # 日志时间戳格式
+binlog_expire_logs_seconds=172800 # 二进制日志过期时间2天
+max_binlog_size=512M     # 最大二进制日志文件大小
+read_rnd_buffer_size =1M # 随机读缓冲区大小
+read_buffer_size =1M     # 读取缓冲区大小
+sort_buffer_size =1M     # 排序缓冲区大小
+sql_mode = STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION # SQL模式设置
+
+[client]
+default-character-set=utf8mb4
+socket=/var/lib/mysql/mysql.sock

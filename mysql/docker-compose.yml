@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql:8.0.36
+    container_name: mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=nLRp%JgJhX3eqm8h
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./conf:/etc/mysql/conf.d
+      - ./data:/var/lib/mysql
+      - ./log:/var/log/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysql --user=root --password=nLRp%JgJhX3eqm8h --execute \"SELECT 1\""]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

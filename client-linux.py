@@ -12,7 +12,6 @@ USER = "s01"
 PASSWORD = "USER_DEFAULT_PASSWORD"
 PORT = 35601
 CU = "119.6.222.234"
-#CT = "189cd.com"
 CT = "www.sc189.net"
 CM = "wap.sc.10086.cn"
 PROBEPORT = 80

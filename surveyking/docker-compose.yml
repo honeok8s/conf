@@ -49,9 +49,9 @@ services:
       - ./mysql/conf:/etc/mysql/conf.d
     networks:
       - surveyking
-#    command:
-#      - "--character-set-server=utf8mb4"
-#      - "--collation-server=utf8mb4_unicode_ci"
+##    command:
+##      - "--character-set-server=utf8mb4"
+##      - "--collation-server=utf8mb4_unicode_ci"
 
 networks:
   surveyking:
