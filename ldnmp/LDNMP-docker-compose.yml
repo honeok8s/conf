@@ -1,0 +1,81 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+      - 443:443/udp
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/etc/nginx/certs
+      - ./nginx/html:/var/www/html
+      - ./nginx/log/nginx:/var/log/nginx
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    tmpfs:
+      - /var/cache/fst_cache:rw,noexec,nosuid,size=512m
+      - /var/cache/ngx_cache:rw,noexec,nosuid,size=512m
+    networks:
+      - web
+
+  php:
+    image: php:fpm-alpine
+    container_name: php
+    restart: unless-stopped
+    volumes:
+      - ./nginx/html:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - web
+
+  php74:
+    image: php:7.4-fpm-alpine
+    container_name: php74
+    restart: unless-stopped
+    volumes:
+      - ./nginx/html:/var/www/html
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - web
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    restart: unless-stopped
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: HONEOK_ROOTPASSWD
+      MYSQL_USER: HONEOK_USER
+      MYSQL_PASSWORD: HONEOK_PASSWD
+    networks:
+      - web
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin --user=root --password=0yMJEWfIAiSJdjaQhZUPcA ping -h localhost"]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: unless-stopped
+    volumes:
+      - ./redis/data:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
