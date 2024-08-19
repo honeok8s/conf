@@ -59,7 +59,7 @@ services:
     networks:
       - web
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin --user=root --password=0yMJEWfIAiSJdjaQhZUPcA ping -h localhost"]
+      test: ["CMD-SHELL", "mysqladmin --user=root --password=HONEOK_ROOTPASSWD ping -h localhost"]
       interval: 10s
       timeout: 10s
       retries: 3
