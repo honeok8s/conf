@@ -76,6 +76,14 @@ services:
     networks:
       - web
 
+  busybox:
+    image: busybox:stable
+    container_name: ldnmp
+    restart: unless-stopped
+    command: ["/bin/sh", "-c", "while true; do sleep 3600; done"]
+    networks:
+      - web
+
 networks:
   web:
     driver: bridge
