@@ -1,0 +1,7 @@
+services:
+  it-tools:
+    image: qingfeng2336/it-tools:latest
+    container_name: it-tools
+    ports:
+      - "$default_port_1:80"
+    restart: unless-stopped
