@@ -5,7 +5,7 @@ services:
     volumes:
       - ./config:/opt/alist/data
     ports:
-      - $default_port_1:5244
+      - default_port_1:5244
     environment:
       - PUID=0
       - PGID=0
