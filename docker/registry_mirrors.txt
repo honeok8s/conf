@@ -1,3 +1,4 @@
 https://registry.honeok.com
+https://docker.1panel.live
 https://hub.littlediary.cn
 https://h.ysicing.net
