@@ -6,7 +6,7 @@ services:
       - "$default_port_1:80"
     environment:
       - NEXTCLOUD_ADMIN_USER=nextcloud
-      - NEXTCLOUD_ADMIN_PASSWORD=$rootpasswd
+      - NEXTCLOUD_ADMIN_PASSWORD=$random_password
     volumes:
       - ./nextcloud:/var/www/html
     restart: unless-stopped
