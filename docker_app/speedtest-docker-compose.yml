@@ -1,0 +1,9 @@
+services:
+  speedtest:
+    image: ghcr.io/librespeed/speedtest:latest
+    container_name: speedtest
+    ports:
+      - "$default_port_1:80"
+    environment:
+      - MODE=standalone
+    restart: unless-stopped
