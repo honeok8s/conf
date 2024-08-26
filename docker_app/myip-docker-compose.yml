@@ -1,0 +1,7 @@
+services:
+  myip:
+    image: ghcr.io/jason5ng32/myip:latest
+    container_name: myip
+    ports:
+      - "$default_port_1:18966"
+    restart: unless-stopped
