@@ -12,6 +12,6 @@ services:
       - UTILITIES_SPEEDTESTDOTNET=true
       - UTILITIES_FAKESHELL=true
       - UTILITIES_IPERF3=true
-      - UTILITIES_IPERF3_PORT_MIN=$docker_port_2
-      - UTILITIES_IPERF3_PORT_MAX=$docker_port_2
+      - UTILITIES_IPERF3_PORT_MIN=$default_port_2
+      - UTILITIES_IPERF3_PORT_MAX=$default_port_2
     restart: unless-stopped
