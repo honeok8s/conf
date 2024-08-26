@@ -1,0 +1,12 @@
+services:
+  nextcloud:
+    image: nextcloud:latest
+    container_name: nextcloud
+    ports:
+      - "$default_port_1:80"
+    environment:
+      - NEXTCLOUD_ADMIN_USER=nextcloud
+      - NEXTCLOUD_ADMIN_PASSWORD=$rootpasswd
+    volumes:
+      - ./nextcloud:/var/www/html
+    restart: unless-stopped
