@@ -1,0 +1,10 @@
+services:
+  qinglong:
+    image: whyour/qinglong:latest
+    container_name: qinglong
+    hostname: qinglong
+    ports:
+      - "$default_port_1:5700"
+    volumes:
+      - ./data:/ql/data
+    restart: unless-stopped
