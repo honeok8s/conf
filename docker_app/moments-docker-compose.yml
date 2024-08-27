@@ -3,7 +3,7 @@ services:
     image: kingwrcy/moments:latest
     container_name: moments
     ports:
-      - "$default_port_1:3000"
+      - "default_port_1:3000"
     volumes:
       - ./data:/app/data
       - /etc/localtime:/etc/localtime:ro
