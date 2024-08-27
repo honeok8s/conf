@@ -3,7 +3,7 @@ services:
     image: onlyoffice/documentserver:latest
     container_name: onlyoffice
     ports:
-      - "$default_port_1:80"
+      - "default_port_1:80"
     volumes:
       - ./logs:/var/log/onlyoffice
       - ./data:/var/www/onlyoffice/Data
