@@ -3,8 +3,8 @@ services:
     image: idoop/zentao:latest
     container_name: zentao-server
     ports:
-      - "$default_port_1:80"
-      - "$default_port_2:3306"
+      - "default_port_1:80"
+      - "default_port_2:3306"
     environment:
       - ADMINER_USER=root
       - ADMINER_PASSWD=123456
