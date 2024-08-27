@@ -4,7 +4,7 @@ services:
     container_name: searxng
     init: true
     ports:
-      - "$default_port_1:8080"
+      - "default_port_1:8080"
     volumes:
       - ./config:/etc/searxng
       - ./templates:/usr/local/searxng/searx/templates/simple
