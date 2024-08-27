@@ -3,7 +3,7 @@ services:
     image: linuxserver/qbittorrent:latest
     container_name: qbittorrent
     ports:
-      - "$default_port_1:8081"
+      - "default_port_1:8081"
       - "6881:6881"
       - "6881:6881/udp"
     environment:
