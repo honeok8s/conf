@@ -3,7 +3,7 @@ services:
     image: qdtoday/qd:latest
     container_name: qd
     ports:
-      - "$default_port_1:80"
+      - "default_port_1:80"
     volumes:
       - ./config:/usr/src/app/config
     restart: unless-stopped
