@@ -6,7 +6,7 @@ services:
       - seccomp=unconfined
       - apparmor=unconfined
     ports:
-      - "$default_port_1:2342"
+      - "default_port_1:2342"
     environment:
       - PHOTOPRISM_UPLOAD_NSFW=true
       - PHOTOPRISM_ADMIN_PASSWORD=$random_password
