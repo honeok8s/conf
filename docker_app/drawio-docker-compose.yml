@@ -3,7 +3,7 @@ services:
     image: jgraph/drawio:latest
     container_name: drawio
     ports:
-      - "$default_port_1:8080"
+      - "default_port_1:8080"
     volumes:
       - ./drawio:/var/lib/drawio
     restart: unless-stopped
