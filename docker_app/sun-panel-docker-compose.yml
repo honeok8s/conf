@@ -3,7 +3,7 @@ services:
     image: hslr/sun-panel:latest
     container_name: sun-panel
     ports:
-      - "$default_port_1:3002"
+      - "default_port_1:3002"
     volumes:
       - ./conf:/app/conf
       - ./uploads:/app/uploads
