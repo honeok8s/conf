@@ -3,8 +3,8 @@ services:
     image: linuxserver/emby:latest
     container_name: emby
     ports:
-      - "$default_port_1:8096"
-      - "$default_port_2:8920"
+      - "default_port_1:8096"
+      - "default_port_2:8920"
     environment:
       - UID=1000
       - GID=100
