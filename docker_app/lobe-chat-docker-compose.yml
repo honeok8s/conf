@@ -3,5 +3,5 @@ services:
     image: lobehub/lobe-chat:latest
     container_name: lobe-chat
     ports:
-      - "$default_port_1:3210"
+      - "default_port_1:3210"
     restart: unless-stopped
