@@ -4,7 +4,7 @@ services:
     container_name: memeos
     hostname: memeos
     ports:
-      - "$default_port_1:5230"
+      - "default_port_1:5230"
     volumes:
       - ./memos:/var/opt/memos
     restart: unless-stopped
