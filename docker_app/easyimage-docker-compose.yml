@@ -3,7 +3,7 @@ services:
     image: ddsderek/easyimage:latest
     container_name: easyimage
     ports:
-      - "$default_port_1:80"
+      - "default_port_1:80"
     environment:
       - TZ=Asia/Shanghai
       - PUID=1000
